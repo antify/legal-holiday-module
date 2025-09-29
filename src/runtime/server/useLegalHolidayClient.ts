@@ -11,7 +11,7 @@ import {
   $fetch,
 } from 'ofetch';
 
-const fetchedDataSchema = object({
+export const fetchedDataSchema = object({
   status: string().required(),
   feiertage: array().required().of(object({
     date: string().required(),
