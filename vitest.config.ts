@@ -9,20 +9,5 @@ export default defineConfig({
     include: [
       'test/**/*.test.ts',
     ],
-    coverage: {
-      reporter: [
-        'text',
-        'lcov',
-      ],
-    },
-    hookTimeout: 10000,
-  },
-  resolve: {
-    alias: {
-      '#imports': `${__dirname}/.nuxt/imports.d.ts`,
-    },
-  },
-  esbuild: {
-    tsconfig: 'test/fixtures/basic/tsconfig.json',
   },
 });
