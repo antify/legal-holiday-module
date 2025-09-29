@@ -3,7 +3,6 @@ import {
   createResolver,
 } from '@nuxt/kit';
 
-// Module options TypeScript interface definition
 export interface ModuleOptions {
   /**
    * Integration between the module and the project's user logic.
@@ -17,11 +16,9 @@ export default defineNuxtModule<ModuleOptions>({
     name: 'legal-holiday-module',
     configKey: 'legalHolidayModule',
   },
-  // Default configuration options of the Nuxt module
   defaults: {},
   setup(_options, _nuxt) {
     if (JSON.stringify(_options) === '{}') {
-      // nuxt-module-build build --stub call this setup without any options. This would break the code.
       return;
     }
 
