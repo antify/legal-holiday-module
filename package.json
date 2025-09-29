@@ -17,13 +17,8 @@
   "files": [
     "dist"
   ],
-  "nuxt": {
-    "build": {
-      "failOnWarn": false
-    }
-  },
   "scripts": {
-    "build": "nuxt-module-build build --fail-on-warn=false",
+    "build": "nuxt-module-build build",
     "prepack": "pnpm build",
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
