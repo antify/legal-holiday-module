@@ -1,10 +1,14 @@
 name: release
 
 on:
-  workflow_run:
-    workflows: [vitest]
-    types: [completed]
-    branches: [main]
+  push:
+    branches:
+      - main
+#on:
+#  workflow_run:
+#    workflows: [vitest]
+#    types: [completed]
+#    branches: [main]
 
 jobs:
   release:
