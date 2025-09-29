@@ -26,7 +26,6 @@ export default defineNuxtModule<ModuleOptions>({
     const runtimeDir = resolver.resolve('runtime');
 
     _nuxt.options.build.transpile.push(runtimeDir);
-    _nuxt.options.build.failOnWarn = false;
 
     _nuxt.hook('nitro:config', (nitroConfig) => {
       nitroConfig.alias = nitroConfig.alias || {};
