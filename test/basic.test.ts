@@ -1150,6 +1150,6 @@ describe('useLegalHoliday', async () => {
     expect(getLegalHolidaysSpy).not.toHaveBeenCalled();
   });
 
-  // TODO:: Check getting legal holidays by state are correct
-  // TODO:: Check getting augsburg specific legal holiday
+  // TODO:: Get legal holidays by states
+  // TODO:: Get augsburg specific legal holiday
 });

@@ -1,14 +1,23 @@
 {
   "extends": "./playground/.nuxt/tsconfig.json",
   "compilerOptions": {
-    "useUnknownInCatchVariables": false,
-    "types": ["@types/node"]
+    "module": "ESNext",
+    "moduleResolution": "NodeNext",
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
-    "types",
+    "src/**/*.ts",
+    "src/**/*.vue",
+    "test/**/*.ts",
+    "vitest.config.ts" // Wichtig, falls die Konfiguration im Root liegt
   ],
   "exclude": [
-    "dist",
-    "playground"
+    "node_modules",
+    "dist" // Die gebuildeten Dateien ausschließen
   ]
 }
