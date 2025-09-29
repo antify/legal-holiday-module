@@ -5,7 +5,8 @@
     "types": ["@types/node"]
   },
   "include": [
-    "types"
+    "types",
+    "src"
   ],
   "exclude": [
     "dist",
