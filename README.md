@@ -1,84 +1,71 @@
-<!--
-Get your module up and running quickly.
+# Legal Holiday Module
 
-Find and replace all on all files (CMD+SHIFT+F):
-- Name: My Module
-- Package name: my-module
-- Description: My new Nuxt module
--->
-
-# My Module
-
-[![npm version][npm-version-src]][npm-version-href]
-[![npm downloads][npm-downloads-src]][npm-downloads-href]
-[![License][license-src]][license-href]
-[![Nuxt][nuxt-src]][nuxt-href]
-
-My new Nuxt module for doing amazing things.
-
-- [✨ &nbsp;Release Notes](/CHANGELOG.md)
-<!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/my-module?file=playground%2Fapp.vue) -->
-<!-- - [📖 &nbsp;Documentation](https://example.com) -->
+A Nuxt 3 module that provides a simple composable for fetching German public holidays.  
+You can retrieve holidays for all federal states or filter them by a specific state for a given year.
 
 ## Features
 
-<!-- Highlight some of the features your module provide here -->
-- ⛰ &nbsp;Foo
-- 🚠 &nbsp;Bar
-- 🌲 &nbsp;Baz
+- Fetch all legal holidays for Germany
+- Filter holidays by federal state (Bundesland)
+- Support for Augsburg-specific holidays
+- Caching mechanism to reduce API calls
+- TypeScript support out of the box
 
-## Quick Setup
+## Installation
 
-Install the module to your Nuxt application with one command:
-
+Install the module via npm (or your preferred package manager):
 ```bash
-npx nuxi module add my-module
+pnpm i @antify/legal-holidy-module
 ```
 
-That's it! You can now use My Module in your Nuxt app ✨
 
+Then, add it to your nuxt.config.ts:
 
-## Contribution
+```typescript
+export default defineNuxtConfig({
+modules: [
+'@antify/legal-holiday-module'
+]
+})
+```
 
-<details>
-  <summary>Local development</summary>
-  
-  ```bash
-  # Install dependencies
-  npm install
-  
-  # Generate type stubs
-  npm run dev:prepare
-  
-  # Develop with the playground
-  npm run dev
-  
-  # Build the playground
-  npm run dev:build
-  
-  # Run ESLint
-  npm run lint
-  
-  # Run Vitest
-  npm run test
-  npm run test:watch
-  
-  # Release new version
-  npm run release
-  ```
+## Usage
 
-</details>
+The module provides the useLegalHolidays composable.
 
+Get all holidays for a given year
+```typescript
+const { getHolidays } = useLegalHolidays()
 
-<!-- Badges -->
-[npm-version-src]: https://img.shields.io/npm/v/my-module/latest.svg?style=flat&colorA=020420&colorB=00DC82
-[npm-version-href]: https://npmjs.com/package/my-module
+const holidays = await getHolidays(2024)
+console.log(holidays)
+/*
+[
+  { date: '2024-01-01', name: 'Neujahrstag' },
+  { date: '2024-03-29', name: 'Karfreitag' },
+  ...
+]
+*/
+```
 
-[npm-downloads-src]: https://img.shields.io/npm/dm/my-module.svg?style=flat&colorA=020420&colorB=00DC82
-[npm-downloads-href]: https://npm.chart.dev/my-module
+Get holidays for a specific state
+```typescript
+const { getHolidays } = useLegalHolidays()
 
-[license-src]: https://img.shields.io/npm/l/my-module.svg?style=flat&colorA=020420&colorB=00DC82
-[license-href]: https://npmjs.com/package/my-module
+const holidays = await getHolidays(2024, { state: 'bw' }) // Baden-Württemberg
+console.log(holidays)
+/*
+[
+  { date: '2024-01-01', name: 'Neujahrstag' },
+  { date: '2024-01-06', name: 'Heilige Drei Könige' },
+  ...
+]
+*/
+```
 
-[nuxt-src]: https://img.shields.io/badge/Nuxt-020420?logo=nuxt.js
-[nuxt-href]: https://nuxt.com
+Augsburg-specific holidays
+```typescript
+const { getHolidays } = useLegalHolidays()
+
+const holidays = await getHolidays(2024, { augsburg: true })
+```

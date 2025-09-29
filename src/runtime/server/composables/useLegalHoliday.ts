@@ -17,7 +17,6 @@ import {
   StringSchema,
 } from 'yup';
 
-// Ein einzelner LegalHoliday-Eintrag
 const legalHolidaySchema = object({
   date: string().required(),
   name: string().required(),
@@ -32,7 +31,6 @@ const legalHolidaySchema = object({
   ),
 });
 
-// Ein Jahr-Cache-Eintrag
 const yearCacheSchema = object({
   cacheDate: date().required(),
   legalHolidays: array().of(legalHolidaySchema).required(),
@@ -79,7 +77,7 @@ export const useLegalHoliday = () => {
         state: options?.state,
       };
 
-      let content: CachedLegalHolidays | null;
+      let content: CachedLegalHolidays | null = null;
 
       /**
        * Get data from the data handler
