@@ -17,6 +17,11 @@
   "files": [
     "dist"
   ],
+  "nuxt": {
+    "build": {
+      "failOnWarn": false
+    }
+  },
   "scripts": {
     "build": "nuxt-module-build build",
     "prepack": "pnpm build",
