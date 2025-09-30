@@ -1,40 +1,73 @@
 # Legal Holiday Module
 
-A Nuxt 3 module that provides a simple composable for fetching German public holidays.  
-You can retrieve holidays for all federal states or filter them by a specific state for a given year.
+A **Nuxt 3 module** for fetching German public holidays.  
+It provides a composable that lets you retrieve holidays for all federal states or filter them by state — including Augsburg-specific rules — for a given year.
 
-## Features
+---
 
-- Fetch all legal holidays for Germany
-- Filter holidays by federal state (Bundesland)
-- Support for Augsburg-specific holidays
-- Caching mechanism to reduce API calls
-- TypeScript support out of the box
+## ✨ Features
 
-## Installation
+- Fetch all legal holidays in Germany
+- Filter by federal state (*Bundesland*)
+- Support for Augsburg-only holidays
+- Built-in caching layer to reduce API calls
+- Written in TypeScript, ready to use
 
-Install the module via npm (or your preferred package manager):
+---
+
+## 📦 Installation
+
+Install via your preferred package manager:
+
 ```bash
-pnpm i @antify/legal-holidy-module
-```
+pnpm add @antify/legal-holiday-module
+# or
+npm install @antify/legal-holiday-module
+# or
+yarn add @antify/legal-holiday-module
+````
 
+Add the module to your `nuxt.config.ts` and configure the data handler:
 
-Then, add it to your nuxt.config.ts:
-
-```typescript
+```ts
 export default defineNuxtConfig({
-modules: [
-'@antify/legal-holiday-module'
-]
+  modules: [
+    '@antify/legal-holiday-module'
+  ],
+  legalHolidayModule: {
+    dataHandler: 'path/to/dataHandler',
+  },
 })
 ```
 
-## Usage
+---
 
-The module provides the useLegalHolidays composable.
+## 🗄 Data Handler
 
-Get all holidays for a given year
-```typescript
+The **data handler** is used for caching.
+It must export a function created via `defineDataHandler`.
+Place the file at the path configured in `nuxt.config.ts`.
+
+```ts
+export default defineDataHandler({
+  async findData(year: number): Promise<CachedLegalHolidays | null> {
+    // Load cached data (e.g. from DB or filesystem)
+  },
+  async saveData(data: CachedLegalHolidays): Promise<CachedLegalHolidays | null> {
+    // Persist new data
+  },
+});
+```
+
+---
+
+## 🔧 Usage
+
+The module exposes the `useLegalHolidays` composable.
+
+### Get all holidays for a year
+
+```ts
 const { getHolidays } = useLegalHolidays()
 
 const holidays = await getHolidays(2024)
@@ -48,8 +81,9 @@ console.log(holidays)
 */
 ```
 
-Get holidays for a specific state
-```typescript
+### Get holidays for a specific state
+
+```ts
 const { getHolidays } = useLegalHolidays()
 
 const holidays = await getHolidays(2024, { state: 'bw' }) // Baden-Württemberg
@@ -63,9 +97,17 @@ console.log(holidays)
 */
 ```
 
-Augsburg-specific holidays
-```typescript
+### Augsburg-specific holidays
+
+```ts
 const { getHolidays } = useLegalHolidays()
 
 const holidays = await getHolidays(2024, { augsburg: true })
 ```
+
+---
+
+## 📖 Notes
+
+* `state` uses the official 2-letter abbreviations (`bw`, `by`, `be`, etc.).
+* If no cached data is found, the module fetches fresh data from the API and persists it via your `dataHandler`.
