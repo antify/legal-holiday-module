@@ -27,16 +27,13 @@
     "lint": "eslint .",
     "test": "vitest run"
   },
-  "peerDependencies": {
-    "@antify/default-template": "0.0.16",
-    "@antify/ui-module": "2.13.17"
-  },
   "dependencies": {
     "@nuxt/kit": "^3.15.4",
     "date-fns": "^3.6.0",
     "yup": "1.7.1"
   },
   "devDependencies": {
+    "@antify/template-module": "0.0.2",
     "@eslint/js": "^9.26.0",
     "@faker-js/faker": "^8.4.1",
     "@nuxt/eslint-plugin": "^1.3.0",
