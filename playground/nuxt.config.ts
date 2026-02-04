@@ -4,7 +4,7 @@ export default defineNuxtConfig({
     autoImport: false,
   },
   modules: [
-    '@antify/ui-module',
+    '@antify/template-module',
     '../src/module',
   ],
   legalHolidayModule: {
